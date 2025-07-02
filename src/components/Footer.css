@@ -1,12 +1,18 @@
+/* ============================================================================= */
+/* FOOTER STYLES - MATCHING SLATE THEME                                         */
+/* ============================================================================= */
+
 .footer {
   margin-top: auto;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background: var(--bg-card, #1e293b); /* slate-800 */
+  color: var(--text-primary, #f1f5f9); /* slate-100 */
+  border-top: 1px solid var(--border-primary, #334155); /* slate-600 */
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
 }
 
+/* Remove the gradient overlay for cleaner look */
 .footer::before {
   content: '';
   position: absolute;
@@ -14,29 +20,31 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
   z-index: 1;
 }
 
+/* Light theme */
 .footer-light {
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  color: #495057;
-  border-top: 1px solid #dee2e6;
+  background: var(--bg-primary, #f8fafc); /* slate-50 */
+  color: var(--text-primary, #1e293b); /* slate-800 */
+  border-top: 1px solid var(--border-primary, #e2e8f0); /* slate-200 */
 }
 
 .footer-light::before {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.5);
 }
 
+/* Dark theme - matching slate system */
 .footer-dark {
-  background: linear-gradient(135deg, #1a1a1a 0%, #2d3748 100%);
-  color: #e2e8f0;
-  border-top: 1px solid #4a5568;
+  background: var(--bg-card, #1e293b); /* slate-800 */
+  color: var(--text-primary, #f1f5f9); /* slate-100 */
+  border-top: 1px solid var(--border-primary, #334155); /* slate-600 */
 }
 
 .footer-dark::before {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .footer-content {
@@ -63,19 +71,18 @@
   max-width: 300px;
 }
 
+/* Updated brand title to match ExpenseFlow theme */
 .footer-brand-title {
   font-size: 28px;
   font-weight: 700;
   margin: 0 0 8px 0;
-  background: linear-gradient(45deg, #4facfe, #00f2fe);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--accent-blue, #3b82f6); /* Blue to match app branding */
+  font-family: var(--font-family, 'Inter', system-ui, sans-serif);
 }
 
 .footer-brand-subtitle {
   font-size: 14px;
-  opacity: 0.9;
+  color: var(--text-secondary, #64748b); /* slate-500 */
   margin: 0 0 16px 0;
   font-weight: 500;
 }
@@ -83,7 +90,7 @@
 .footer-description {
   font-size: 14px;
   line-height: 1.6;
-  opacity: 0.8;
+  color: var(--text-secondary, #64748b); /* slate-500 */
   margin: 0;
 }
 
@@ -91,7 +98,7 @@
   font-size: 16px;
   font-weight: 600;
   margin: 0 0 20px 0;
-  color: inherit;
+  color: var(--text-primary, #f1f5f9); /* slate-100 */
 }
 
 .footer-links-list {
@@ -105,27 +112,20 @@
 }
 
 .footer-link {
-  color: inherit;
+  color: var(--text-secondary, #64748b); /* slate-500 */
   text-decoration: none;
   font-size: 14px;
-  opacity: 0.8;
   transition: all 0.3s ease;
   position: relative;
+  display: inline-block;
 }
 
 .footer-link:hover {
-  opacity: 1;
+  color: var(--accent-blue, #3b82f6); /* Blue on hover */
   transform: translateX(4px);
 }
 
-.footer-light .footer-link:hover {
-  color: #007bff;
-}
-
-.footer-dark .footer-link:hover {
-  color: #4facfe;
-}
-
+/* Social links matching slate theme */
 .social-links {
   display: flex;
   gap: 16px;
@@ -139,17 +139,32 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  color: inherit;
+  background: var(--bg-hover, #334155); /* slate-600 */
+  color: var(--text-secondary, #94a3b8); /* slate-400 */
   text-decoration: none;
   transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-primary, #475569); /* slate-500 */
 }
 
 .social-link:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--accent-blue, #3b82f6);
+  color: white;
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.25);
+  border-color: var(--accent-blue, #3b82f6);
+}
+
+/* Light theme social links */
+[data-theme="light"] .social-link {
+  background: var(--bg-hover, #f1f5f9); /* slate-100 */
+  color: var(--text-secondary, #64748b); /* slate-500 */
+  border-color: var(--border-primary, #e2e8f0); /* slate-200 */
+}
+
+[data-theme="light"] .social-link:hover {
+  background: var(--accent-blue, #3b82f6);
+  color: white;
+  border-color: var(--accent-blue, #3b82f6);
 }
 
 .footer-contact {
@@ -161,16 +176,16 @@
   display: block;
   font-weight: 500;
   margin-bottom: 4px;
-  opacity: 0.9;
+  color: var(--text-primary, #f1f5f9); /* slate-100 */
 }
 
 .footer-bottom {
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid var(--border-primary, #334155); /* slate-600 */
   padding: 25px 0;
 }
 
-.footer-light .footer-bottom {
-  border-color: rgba(0, 0, 0, 0.1);
+[data-theme="light"] .footer-bottom {
+  border-color: var(--border-primary, #e2e8f0); /* slate-200 */
 }
 
 .footer-bottom-content {
@@ -182,7 +197,7 @@
 .footer-copyright p {
   margin: 0;
   font-size: 14px;
-  opacity: 0.8;
+  color: var(--text-secondary, #64748b); /* slate-500 */
 }
 
 .footer-creator {
@@ -191,7 +206,13 @@
 
 .footer-creator-link {
   font-weight: 600;
-  color: #4facfe;
+  color: var(--accent-blue, #3b82f6);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-creator-link:hover {
+  color: var(--accent-blue-hover, #2563eb);
 }
 
 .footer-legal {
@@ -205,7 +226,7 @@
 }
 
 .footer-separator {
-  opacity: 0.5;
+  color: var(--text-tertiary, #475569); /* slate-600 */
   font-size: 12px;
 }
 
@@ -279,3 +300,53 @@
 .footer-section:nth-child(2) { animation-delay: 0.2s; }
 .footer-section:nth-child(3) { animation-delay: 0.3s; }
 .footer-section:nth-child(4) { animation-delay: 0.4s; }
+
+/* Enhanced hover effects for better UX */
+.footer-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: var(--accent-blue, #3b82f6);
+  transition: width 0.3s ease;
+}
+
+.footer-link:hover::after {
+  width: 100%;
+}
+
+/* Improved focus states for accessibility */
+.footer-link:focus,
+.social-link:focus {
+  outline: 2px solid var(--accent-blue, #3b82f6);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Enhanced responsiveness for container matching */
+@media (min-width: 1200px) {
+  .footer-content {
+    max-width: 1200px; /* Match your dashboard max-width */
+  }
+}
+
+/* Dark mode specific improvements */
+[data-theme="dark"] .footer {
+  background: #1e293b; /* slate-800 to match your theme */
+  border-top-color: #334155; /* slate-600 */
+}
+
+[data-theme="dark"] .footer-brand-title {
+  color: #60a5fa; /* blue-400 for better dark mode visibility */
+}
+
+[data-theme="light"] .footer {
+  background: #f8fafc; /* slate-50 */
+  border-top-color: #e2e8f0; /* slate-200 */
+}
+
+[data-theme="light"] .footer-brand-title {
+  color: #3b82f6; /* blue-600 for light mode */
+}

@@ -19,7 +19,7 @@ function App() {
   return (
     <ThemeProvider>
       <AuthProvider>
-        <ExpenseProvider> {/* Add ExpenseProvider here */}
+        <ExpenseProvider>
           <Router>
             <div className="App">
               <Navigation />
@@ -58,7 +58,7 @@ function App() {
               <Footer />
             </div>
           </Router>
-        </ExpenseProvider> {/* Close ExpenseProvider here */}
+        </ExpenseProvider> 
       </AuthProvider>
     </ThemeProvider>
   );

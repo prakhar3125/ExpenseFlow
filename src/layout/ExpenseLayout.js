@@ -61,19 +61,22 @@ const ExpenseLayout = () => {
 
   return (
     <div className={`min-h-screen transition-colors duration-200 ${
-      isDarkMode ? 'bg-gray-900' : 'bg-gray-50'
+      isDarkMode ? 'bg-slate-900' : 'bg-gray-50'
     }`}>
-      <div className="container mx-auto p-3 sm:p-4 lg:p-6 max-w-7xl">
+      {/* Match Dashboard container width */}
+      <div className="max-w-6xl mx-auto px-4 py-6 space-y-6">
         
-        {/* Clean Header */}
-        <div className={`rounded-xl shadow-sm mb-6 transition-colors duration-200 ${
+        {/* Header Section */}
+        <div className={`rounded-xl shadow-sm border transition-colors duration-200 ${
           isDarkMode 
-            ? 'bg-gray-800 border border-gray-700' 
-            : 'bg-white border border-gray-100'
+            ? 'bg-slate-800 border-slate-700' 
+            : 'bg-white border-gray-200'
         }`}>
           
           {/* App Header */}
-          <div className="p-4 sm:p-6 border-b border-gray-200 dark:border-gray-700">
+          <div className={`p-6 border-b ${
+            isDarkMode ? 'border-slate-700' : 'border-gray-200'
+          }`}>
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
@@ -83,12 +86,12 @@ const ExpenseLayout = () => {
                 </div>
                 <div>
                   <h1 className={`text-xl sm:text-2xl font-semibold ${
-                    isDarkMode ? 'text-gray-100' : 'text-gray-900'
+                    isDarkMode ? 'text-slate-100' : 'text-gray-900'
                   }`}>
                     ExpenseFlow
                   </h1>
                   <p className={`text-sm ${
-                    isDarkMode ? 'text-gray-400' : 'text-gray-500'
+                    isDarkMode ? 'text-slate-400' : 'text-gray-500'
                   }`}>
                     AI-Powered Expense Management
                   </p>
@@ -99,7 +102,7 @@ const ExpenseLayout = () => {
               {!selectedSources.includes('all') && selectedSources.length > 0 && (
                 <div className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm ${
                   isDarkMode 
-                    ? 'bg-gray-700 text-gray-300' 
+                    ? 'bg-slate-700 text-slate-300' 
                     : 'bg-gray-100 text-gray-600'
                 }`}>
                   <Filter size={14} />
@@ -109,35 +112,35 @@ const ExpenseLayout = () => {
             </div>
           </div>
 
-          {/* Stats Overview - Minimalist Grid */}
-          <div className="p-4 sm:p-6">
+          {/* Stats Overview */}
+          <div className="p-6">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
               
               {/* Total Balance */}
               <div className={`p-5 rounded-lg transition-all duration-200 ${
                 isDarkMode 
-                  ? 'bg-gray-800 border border-gray-700 hover:border-gray-600' 
+                  ? 'bg-slate-800 border border-slate-700 hover:border-slate-600' 
                   : 'bg-white border border-gray-200 hover:border-gray-300'
               }`}>
                 <div className="flex items-center justify-between">
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
                       <TrendingUp className={`w-4 h-4 ${
-                        isDarkMode ? 'text-gray-400' : 'text-gray-500'
+                        isDarkMode ? 'text-slate-400' : 'text-gray-500'
                       }`} />
                       <p className={`text-sm font-medium ${
-                        isDarkMode ? 'text-gray-400' : 'text-gray-600'
+                        isDarkMode ? 'text-slate-400' : 'text-gray-600'
                       }`}>
                         Total Balance
                       </p>
                     </div>
                     <p className={`text-2xl font-bold ${
-                      isDarkMode ? 'text-gray-100' : 'text-gray-900'
+                      isDarkMode ? 'text-slate-100' : 'text-gray-900'
                     }`}>
                       {formatIndianCurrency(totalSourceBalance)}
                     </p>
                     <p className={`text-xs mt-1 ${
-                      isDarkMode ? 'text-gray-500' : 'text-gray-500'
+                      isDarkMode ? 'text-slate-500' : 'text-gray-500'
                     }`}>
                       Across {sources.length} sources
                     </p>
@@ -148,28 +151,28 @@ const ExpenseLayout = () => {
               {/* This Month */}
               <div className={`p-5 rounded-lg transition-all duration-200 ${
                 isDarkMode 
-                  ? 'bg-gray-800 border border-gray-700 hover:border-gray-600' 
+                  ? 'bg-slate-800 border border-slate-700 hover:border-slate-600' 
                   : 'bg-white border border-gray-200 hover:border-gray-300'
               }`}>
                 <div className="flex items-center justify-between">
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
                       <Receipt className={`w-4 h-4 ${
-                        isDarkMode ? 'text-gray-400' : 'text-gray-500'
+                        isDarkMode ? 'text-slate-400' : 'text-gray-500'
                       }`} />
                       <p className={`text-sm font-medium ${
-                        isDarkMode ? 'text-gray-400' : 'text-gray-600'
+                        isDarkMode ? 'text-slate-400' : 'text-gray-600'
                       }`}>
                         This Month
                       </p>
                     </div>
                     <p className={`text-2xl font-bold ${
-                      isDarkMode ? 'text-gray-100' : 'text-gray-900'
+                      isDarkMode ? 'text-slate-100' : 'text-gray-900'
                     }`}>
                       {formatIndianCurrency(monthlySpent)}
                     </p>
                     <p className={`text-xs mt-1 ${
-                      isDarkMode ? 'text-gray-500' : 'text-gray-500'
+                      isDarkMode ? 'text-slate-500' : 'text-gray-500'
                     }`}>
                       {thisMonth.length} transactions
                     </p>
@@ -180,28 +183,28 @@ const ExpenseLayout = () => {
               {/* Total Spent */}
               <div className={`p-5 rounded-lg transition-all duration-200 ${
                 isDarkMode 
-                  ? 'bg-gray-800 border border-gray-700 hover:border-gray-600' 
+                  ? 'bg-slate-800 border border-slate-700 hover:border-slate-600' 
                   : 'bg-white border border-gray-200 hover:border-gray-300'
               }`}>
                 <div className="flex items-center justify-between">
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
                       <BarChart3 className={`w-4 h-4 ${
-                        isDarkMode ? 'text-gray-400' : 'text-gray-500'
+                        isDarkMode ? 'text-slate-400' : 'text-gray-500'
                       }`} />
                       <p className={`text-sm font-medium ${
-                        isDarkMode ? 'text-gray-400' : 'text-gray-600'
+                        isDarkMode ? 'text-slate-400' : 'text-gray-600'
                       }`}>
                         Total Spent
                       </p>
                     </div>
                     <p className={`text-2xl font-bold ${
-                      isDarkMode ? 'text-gray-100' : 'text-gray-900'
+                      isDarkMode ? 'text-slate-100' : 'text-gray-900'
                     }`}>
                       {formatIndianCurrency(totalExpenses)}
                     </p>
                     <p className={`text-xs mt-1 ${
-                      isDarkMode ? 'text-gray-500' : 'text-gray-500'
+                      isDarkMode ? 'text-slate-500' : 'text-gray-500'
                     }`}>
                       All time total
                     </p>
@@ -210,10 +213,10 @@ const ExpenseLayout = () => {
               </div>
             </div>
 
-            {/* Clean Navigation */}
+            {/* Quick Actions Navigation */}
             <div>
               <h2 className={`text-lg font-semibold mb-4 ${
-                isDarkMode ? 'text-gray-200' : 'text-gray-800'
+                isDarkMode ? 'text-slate-200' : 'text-gray-800'
               }`}>
                 Quick Actions
               </h2>
@@ -233,7 +236,7 @@ const ExpenseLayout = () => {
                             ? `border-${accent}-500 bg-${accent}-900/20`
                             : `border-${accent}-200 bg-${accent}-50`
                           : isDarkMode
-                            ? 'border-gray-600 bg-gray-700/50 hover:border-gray-500'
+                            ? 'border-slate-600 bg-slate-700/50 hover:border-slate-500'
                             : 'border-gray-200 bg-white hover:border-gray-300'
                       }`}
                     >
@@ -242,19 +245,19 @@ const ExpenseLayout = () => {
                           isActive
                             ? `bg-${accent}-100 text-${accent}-600`
                             : isDarkMode
-                              ? 'bg-gray-600 text-gray-300'
+                              ? 'bg-slate-600 text-slate-300'
                               : 'bg-gray-100 text-gray-600'
                         }`}>
                           <Icon size={24} />
                         </div>
                         <div>
                           <h3 className={`font-semibold text-sm ${
-                            isDarkMode ? 'text-gray-200' : 'text-gray-800'
+                            isDarkMode ? 'text-slate-200' : 'text-gray-800'
                           }`}>
                             {label}
                           </h3>
                           <p className={`text-xs mt-1 ${
-                            isDarkMode ? 'text-gray-400' : 'text-gray-500'
+                            isDarkMode ? 'text-slate-400' : 'text-gray-500'
                           }`}>
                             {description}
                           </p>

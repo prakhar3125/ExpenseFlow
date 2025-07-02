@@ -1,0 +1,26 @@
+[33mcommit a7d76c620b3e80837af99be4beb101070bdf6dce[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Prakhar Sinha <prakharsinha3125@gmail.com>
+Date:   Sat Jun 14 22:15:04 2025 +0530
+
+    fix: minor bug fix , Added footer
+
+[1mdiff --git a/src/App.css b/src/App.css[m
+[1mindex 9ee2ee4..6a7b6bb 100644[m
+[1m--- a/src/App.css[m
+[1m+++ b/src/App.css[m
+[36m@@ -1,14 +1,5 @@[m
+[31m-.App {[m
+[31m-  min-height: 100vh;[m
+[31m-  display: flex;[m
+[31m-  flex-direction: column;[m
+[31m-}[m
+ [m
+[31m-.main-content {[m
+[31m-  flex: 1;[m
+[31m-  display: flex;[m
+[31m-  flex-direction: column;[m
+[31m-}[m
+[32m+[m
+ /* ============================================================================= */[m
+ /* APP.CSS - COMPLETE REWRITE FOR PROPER LIGHT/DARK MODE THEMING              */[m
+ /* ============================================================================= */[m

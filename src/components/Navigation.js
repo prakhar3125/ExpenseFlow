@@ -40,7 +40,7 @@ const Navigation = () => {
   // Close mobile menu on window resize
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 768) { // md breakpoint
+      if (window.innerWidth >= 768) {
         setIsMobileMenuOpen(false);
       }
     };
@@ -67,11 +67,6 @@ const Navigation = () => {
 
   return (
     <>
-      {/* MODIFICATION: 
-        - Added the 'navbar' class to allow your custom CSS to apply the background.
-        - Removed the direct 'bg-white' and 'bg-slate-800' classes.
-        - The border color is still handled by Tailwind's dark mode variant.
-      */}
       <nav className={`navbar sticky top-0 z-50 border-b ${
         isDarkMode 
           ? 'border-slate-700' 
@@ -79,9 +74,10 @@ const Navigation = () => {
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
+            
             {/* Logo */}
             <Link 
-              to="/dashboard" 
+              to="/expenses" 
               className="flex items-center space-x-2 flex-shrink-0"
               onClick={handleNavClick}
             >
@@ -100,12 +96,12 @@ const Navigation = () => {
               }`}>ExpenseFlow</span>
             </Link>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-4">
+            {/* Desktop Navigation - ONLY VISIBLE ON DESKTOP */}
+            <div className="hidden lg:flex items-center space-x-4">
               <Link
-                to="/add-expense"
+                to="/expenses/add"
                 className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-200 ${
-                  location.pathname === '/add-expense'
+                  location.pathname.includes('/expenses')
                     ? 'bg-blue-600 text-white shadow-lg' 
                     : isDarkMode
                       ? 'text-slate-300 hover:bg-slate-700 hover:text-slate-100'
@@ -130,6 +126,7 @@ const Navigation = () => {
                 <span>Dashboard</span>
               </Link>
 
+              {/* SINGLE Theme Toggle - Desktop Only */}
               <button
                 onClick={toggleTheme}
                 className={`p-2 rounded-lg transition-all duration-200 ${
@@ -155,20 +152,8 @@ const Navigation = () => {
               </button>
             </div>
 
-            {/* Mobile Controls */}
-            <div className="md:hidden flex items-center space-x-2">
-              <button
-                onClick={toggleTheme}
-                className={`p-2 rounded-lg transition-all duration-200 ${
-                  isDarkMode
-                    ? 'text-slate-300 hover:bg-slate-700'
-                    : 'text-gray-600 hover:bg-gray-100'
-                }`}
-                aria-label="Toggle theme"
-              >
-                {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
-              </button>
-              
+            {/* Mobile Hamburger Menu Button - ONLY VISIBLE ON MOBILE */}
+            <div className="lg:hidden">
               <button
                 onClick={toggleMobileMenu}
                 className={`p-2 rounded-lg transition-all duration-200 ${
@@ -185,13 +170,8 @@ const Navigation = () => {
           </div>
         </div>
 
-        {/* Mobile Navigation Menu */}
-        {/*
-          MODIFICATION: 
-          - The mobile menu background should now correctly follow the theme
-            because its parent <nav> has the 'navbar' class.
-        */}
-        <div className={`md:hidden transition-all duration-300 ease-in-out border-t ${
+        {/* Mobile Navigation Menu - ONLY VISIBLE ON MOBILE */}
+        <div className={`lg:hidden transition-all duration-300 ease-in-out border-t ${
           isDarkMode ? 'border-slate-700' : 'border-gray-200'
         } ${
           isMobileMenuOpen 
@@ -200,10 +180,10 @@ const Navigation = () => {
         }`}>
           <div className="py-2 space-y-1 px-4">
             <Link
-              to="/add-expense"
+              to="/expenses/add"
               onClick={handleNavClick}
               className={`flex items-center space-x-3 px-4 py-4 rounded-lg transition-all duration-200 ${
-                location.pathname === '/add-expense'
+                location.pathname.includes('/expenses')
                   ? 'bg-blue-600 text-white shadow-lg' 
                   : isDarkMode
                     ? 'text-slate-300 hover:bg-slate-700 active:bg-slate-600'
@@ -229,6 +209,21 @@ const Navigation = () => {
               <span className="font-medium">Dashboard</span>
             </Link>
 
+            {/* Theme Toggle in Mobile Menu */}
+            <button
+              onClick={toggleTheme}
+              className={`flex items-center space-x-3 px-4 py-4 rounded-lg w-full text-left transition-all duration-200 ${
+                isDarkMode
+                  ? 'text-slate-300 hover:bg-slate-700 active:bg-slate-600'
+                  : 'text-gray-600 hover:bg-gray-100 active:bg-gray-200'
+              }`}
+            >
+              {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+              <span className="font-medium">
+                {isDarkMode ? 'Light Mode' : 'Dark Mode'}
+              </span>
+            </button>
+
             <button
               onClick={handleLogout}
               className={`flex items-center space-x-3 px-4 py-4 rounded-lg w-full text-left transition-all duration-200 ${
@@ -247,7 +242,7 @@ const Navigation = () => {
       {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
         <div 
-          className="fixed inset-0 bg-black/20 z-40 md:hidden"
+          className="fixed inset-0 bg-black/20 z-40 lg:hidden"
           onClick={() => setIsMobileMenuOpen(false)}
         />
       )}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
@@ -26,8 +26,8 @@ const RupeeIcon = ({ size = 20, className = "" }) => (
 );
 
 const Authentication = () => {
-  const [email, setEmail] = useState('user@example.com');
-  const [password, setPassword] = useState('password');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -40,7 +40,18 @@ const Authentication = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  React.useEffect(() => {
+  // Set default values for login mode
+  useEffect(() => {
+    if (isLogin) {
+      setEmail('user@example.com');
+      setPassword('password');
+    } else {
+      setEmail('');
+      setPassword('');
+    }
+  }, [isLogin]);
+
+  useEffect(() => {
     if (user) {
       const from = location.state?.from?.pathname || '/expenses';
       navigate(from, { replace: true });
@@ -73,48 +84,54 @@ const Authentication = () => {
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  setError('');
+    e.preventDefault();
+    setError('');
 
-  if (!validateForm()) return;
+    if (!validateForm()) return;
 
-  setIsLoading(true);
+    setIsLoading(true);
 
-  try {
-    // Check if using mock credentials
-    const isMockLogin = email === 'user@example.com' && password === 'password';
-    
-    // Add delay for mock login to show loading state
-    if (isMockLogin) {
-      await new Promise(resolve => setTimeout(resolve, 2000)); // 2 second delay
+    try {
+      // Add delay for better UX (simulates network request)
+      await new Promise(resolve => setTimeout(resolve, 1500));
+
+      let result;
+      if (isLogin) {
+        result = await login({ email, password });
+      } else {
+        result = await signup({ email, password });
+      }
+
+      if (result && result.success) {
+        // Consistent navigation route
+        const from = location.state?.from?.pathname || '/expenses';
+        navigate(from, { replace: true });
+      } else {
+        setError(result?.error || 'Authentication failed. Please try again.');
+      }
+    } catch (err) {
+      console.error('Authentication error:', err);
+      setError('An unexpected error occurred. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
-
-    let result;
-    if (isLogin) {
-      result = await login({ email, password });
-    } else {
-      result = await signup({ email, password });
-    }
-
-    if (result.success) {
-      const from = location.state?.from?.pathname || '/add-expense';
-      navigate(from, { replace: true });
-    } else {
-      setError(result.error || 'Authentication failed. Please try again.');
-    }
-  } catch (err) {
-    setError('An unexpected error occurred. Please try again.');
-  }
-
-  setIsLoading(false);
-};
-
+  };
 
   const handleModeSwitch = () => {
     setIsLogin(!isLogin);
     setError('');
-    setPassword('');
     setConfirmPassword('');
+    
+    // Clear fields when switching to signup, set defaults for login
+    if (isLogin) {
+      // Switching to signup mode
+      setEmail('');
+      setPassword('');
+    } else {
+      // Switching to login mode
+      setEmail('user@example.com');
+      setPassword('password');
+    }
   };
 
   const features = [

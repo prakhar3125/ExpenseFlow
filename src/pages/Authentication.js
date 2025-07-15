@@ -42,7 +42,7 @@ const Authentication = () => {
 
   React.useEffect(() => {
     if (user) {
-      const from = location.state?.from?.pathname || '/dashboard';
+      const from = location.state?.from?.pathname || '/expenses';
       navigate(from, { replace: true });
     }
   }, [user, navigate, location]);
@@ -73,33 +73,42 @@ const Authentication = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('');
+  e.preventDefault();
+  setError('');
 
-    if (!validateForm()) return;
+  if (!validateForm()) return;
 
-    setIsLoading(true);
+  setIsLoading(true);
 
-    try {
-      let result;
-      if (isLogin) {
-        result = await login({ email, password });
-      } else {
-        result = await signup({ email, password });
-      }
-
-      if (result.success) {
-        const from = location.state?.from?.pathname || '/add-expense';
-        navigate(from, { replace: true });
-      } else {
-        setError(result.error || 'Authentication failed. Please try again.');
-      }
-    } catch (err) {
-      setError('An unexpected error occurred. Please try again.');
+  try {
+    // Check if using mock credentials
+    const isMockLogin = email === 'user@example.com' && password === 'password';
+    
+    // Add delay for mock login to show loading state
+    if (isMockLogin) {
+      await new Promise(resolve => setTimeout(resolve, 2000)); // 2 second delay
     }
 
-    setIsLoading(false);
-  };
+    let result;
+    if (isLogin) {
+      result = await login({ email, password });
+    } else {
+      result = await signup({ email, password });
+    }
+
+    if (result.success) {
+      const from = location.state?.from?.pathname || '/add-expense';
+      navigate(from, { replace: true });
+    } else {
+      setError(result.error || 'Authentication failed. Please try again.');
+    }
+  } catch (err) {
+    setError('An unexpected error occurred. Please try again.');
+  }
+
+  setIsLoading(false);
+};
+
 
   const handleModeSwitch = () => {
     setIsLogin(!isLogin);

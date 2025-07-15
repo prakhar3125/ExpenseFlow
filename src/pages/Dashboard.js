@@ -609,15 +609,16 @@ const Dashboard = () => {
                   Your Accounts
                 </h3>
                 <button
-                  onClick={() => navigate('/expenses/sources')}
-                  className={`text-sm px-3 py-1 rounded-lg transition-colors ${
-                    isDarkMode
-                      ? 'bg-blue-900/50 text-blue-400 hover:bg-blue-900/70'
-                      : 'bg-blue-100 text-blue-600 hover:bg-blue-200'
-                  }`}
-                >
-                  Manage
-                </button>
+  onClick={() => navigate('/expenses/sources')}
+  className={`text-sm px-3 py-1 rounded-lg transition-colors font-medium ${
+    isDarkMode
+      ? 'bg-blue-900/50 text-blue-400 hover:bg-blue-900/70'
+      : 'bg-blue-600 text-white hover:bg-blue-700'
+  }`}
+>
+  Manage
+</button>
+
               </div>
               <div className="space-y-3">
                 {sources.slice(0, 4).map((source) => {

@@ -400,14 +400,15 @@
 }
 
 .loading-spinner {
-  animation: spin 1s linear infinite;
+  animation: spin 1s linear infinite !important;
+  display: inline-block;
+  transform-origin: center;
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
-
 /* Form Footer */
 .auth-form-footer {
   margin-top: 2rem;
@@ -566,9 +567,7 @@
     transition: none;
   }
   
-  .loading-spinner {
-    animation: none;
-  }
+
 }
 
 /* High contrast mode */
